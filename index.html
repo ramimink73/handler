@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Event Handler</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<input
+				type="button"
+				name="Ramil"
+				value="Click"
+				onclick="buttonClick (this)"
+			/>
+
+			<div class="block">Increment</div>
+		</div>
+
+		<span class="counter" onmouseover="OnMouseCounter (this)">0 to ∞</span>
+
+		<div class="container">
+			<div class="card">
+				<div class="face">
+					<div class="content">
+						<h3>Point to square</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			let id = false
+
+			function buttonClick(button) {
+				alert('Name ' + button.name + ', also value is ' + button.value + '.')
+			}
+
+			let counter = 0
+
+			function OnMouseCounter(element) {
+				counter++
+				element.innerHTML = ' ' + counter
+			}
+
+			const hoverElement = document.querySelector('.block')
+			const counterElement = document.querySelector('.counter')
+
+			function hoverHandler(e) {
+				if (!id) {
+					id = setInterval(() => {
+						counter++
+						counterElement.textContent = counter
+					}, 100)
+				}
+			}
+
+			function leaveHandler(e) {
+				if (id) {
+					clearInterval(id)
+					id = false
+					counter = 0
+					counterElement.textContent = counter
+				}
+			}
+
+			hoverElement.addEventListener('mouseenter', hoverHandler)
+			hoverElement.addEventListener('mouseleave', leaveHandler)
+		</script>
+	</body>
+</html>
